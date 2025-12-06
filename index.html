@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>多页面轮盘编辑器</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>可编辑轮盘</h1>
+      <p>为每个页面配置标题、媒体、轮盘内容与随机器。</p>
+    </div>
+    <button id="addPageBtn" class="primary">添加新页面</button>
+  </header>
+
+  <main class="layout">
+    <aside class="page-list">
+      <h2>页面列表</h2>
+      <ul id="pageList"></ul>
+    </aside>
+
+    <section class="page-editor">
+      <div id="emptyState" class="empty">暂无页面，请先添加。</div>
+      <div id="editorBody" class="hidden">
+        <div class="grid two-cols">
+          <label class="field">
+            <span>标题</span>
+            <input type="text" id="titleInput" placeholder="输入标题" />
+          </label>
+          <label class="field">
+            <span>副标题</span>
+            <input type="text" id="subtitleInput" placeholder="输入副标题" />
+          </label>
+        </div>
+
+        <div class="media-block">
+          <div class="media-header">
+            <div>
+              <h3>媒体</h3>
+              <p>可加载图片或视频，支持本地文件与在线链接。</p>
+            </div>
+            <div class="media-actions">
+              <label class="secondary">上传文件
+                <input type="file" id="mediaFile" accept="image/*,video/*" hidden />
+              </label>
+              <input type="url" id="mediaUrl" placeholder="粘贴图片或视频链接" />
+            </div>
+          </div>
+          <div class="media-preview" id="mediaPreview">未选择媒体</div>
+        </div>
+
+        <div class="wheel-section">
+          <div class="section-header">
+            <div>
+              <h3>轮盘内容</h3>
+              <p>输入候选项，点击“添加项”纳入抽取。</p>
+            </div>
+            <div class="wheel-inputs">
+              <input type="text" id="wheelItemInput" placeholder="例如：晚餐选项" />
+              <button id="addItemBtn" class="primary">添加项</button>
+            </div>
+          </div>
+
+          <div class="wheel-display">
+            <div class="wheel-wrapper">
+              <canvas id="wheelCanvas" width="380" height="380"></canvas>
+              <div class="pointer">▼</div>
+            </div>
+            <div class="wheel-actions">
+              <button id="spinBtn" class="primary">旋转抽取</button>
+              <div id="spinResult" class="result">等待抽取...</div>
+              <ul id="itemList" class="item-list"></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="randomizer">
+          <div>
+            <h3>随机器</h3>
+            <p>生成自定义范围内的随机数，便于快速灵感。</p>
+          </div>
+          <div class="random-controls">
+            <label class="field">
+              <span>最小值</span>
+              <input type="number" id="minInput" value="1" />
+            </label>
+            <label class="field">
+              <span>最大值</span>
+              <input type="number" id="maxInput" value="100" />
+            </label>
+            <button id="randomBtn" class="secondary">生成随机数</button>
+            <div id="randomResult" class="result">尚未生成</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>数据保存在本地浏览器，可随时编辑与扩展。</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
